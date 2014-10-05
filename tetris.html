@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tetris</title>
+<script type="text/javascript">
+	var dimWidth = 10;
+	var dimHeight = 20;
+	var cellWidth = 30;
+	var cellHeight = 30;
+	var canvasWidth = dimWidth * cellWidth + 1;
+	var canvasHeight = dimHeight * cellHeight + 1;
+	var curX = 0;
+	var curY = 0;
+	var curFigure = 0;
+	var canvas;
+	var ctx;
+	var loop;
+	
+	function initCanvas()
+	{
+		canvas = document.getElementById("gameBoard");
+		ctx = canvas.getContext("2d");
+		drawScene();
+		loop = setInterval(gameLoop, 1000);
+	}
+	
+	function clearScene()
+	{
+		ctx.fillStyle="black";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+	}
+
+	function drawGrid()
+	{
+		ctx.strokeStyle = "gray";
+		ctx.lineWidth = 1;
+		ctx.translate(0.5, 0.5);
+		for(var x = 0; x <= dimWidth; ++x)
+		{
+			ctx.moveTo(x * cellWidth, 0);
+			ctx.lineTo(x * cellWidth, canvasHeight);
+			ctx.stroke();
+		}
+		for(var y = 0; y <= dimHeight; ++y)
+		{
+			ctx.moveTo(0, y * cellHeight);
+			ctx.lineTo(canvasWidth, y * cellHeight);
+			ctx.stroke();
+		}
+	}
+	
+	function drawScene()
+	{
+		clearScene();
+		drawGrid();
+	}
+	
+	function clearFigure()
+	{
+		ctx.fillStyle = "black";
+		ctx.fillRect(curX * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+		ctx.fillRect((curX + 1) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+		ctx.fillRect((curX + 2) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+		ctx.fillRect((curX + 3) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+	}
+	
+	function drawFigure()
+	{
+		ctx.fillStyle = "blue";
+		ctx.fillRect(curX * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+		ctx.fillRect((curX + 1) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+		ctx.fillRect((curX + 2) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+		ctx.fillRect((curX + 3) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+	}
+	
+	function gameLoop()
+	{
+		clearFigure();
+		curY++;
+		drawFigure();
+	}
+	
+	function canvasWidth()
+	{
+		return canvasWidth;
+	}
+
+	function canvasWidth()
+	{
+		return canvasWidth;
+	}
+</script>
+</head>
+<body onload="initCanvas()">
+    <h1>
+      Tetris
+    </h1>
+    <div>
+      <canvas id="gameBoard" width="300" height="600">
+      </canvas>
+    </div>
+</body>
+</html>
