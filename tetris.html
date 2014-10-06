@@ -3,49 +3,29 @@
 <head>
 <title>Tetris</title>
 <script type="text/javascript">
-	var dimWidth = 10;
-	var dimHeight = 20;
-	var cellWidth = 30;
-	var cellHeight = 30;
-	var canvasWidth = dimWidth * cellWidth + 1;
-	var canvasHeight = dimHeight * cellHeight + 1;
-	var curX = 0;
-	var curY = 0;
-	var curFigure = 0;
-	var canvas;
-	var ctx;
-	var loop;
-	
+	function initGame()
+	{
+		var game = new Tetris("gameBoard");
+	}
+/*	
 	function initCanvas()
 	{
 		canvas = document.getElementById("gameBoard");
 		ctx = canvas.getContext("2d");
 		drawScene();
-		loop = setInterval(gameLoop, 1000);
+		document.getElementById("gameBoard").onclick = startStop;
 	}
 	
-	function clearScene()
+	function startStop()
 	{
-		ctx.fillStyle="black";
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
-	}
-
-	function drawGrid()
-	{
-		ctx.strokeStyle = "gray";
-		ctx.lineWidth = 1;
-		ctx.translate(0.5, 0.5);
-		for(var x = 0; x <= dimWidth; ++x)
+		if (loop)
 		{
-			ctx.moveTo(x * cellWidth, 0);
-			ctx.lineTo(x * cellWidth, canvasHeight);
-			ctx.stroke();
+			clearInterval(loop);
+			loop = null;
 		}
-		for(var y = 0; y <= dimHeight; ++y)
+		else
 		{
-			ctx.moveTo(0, y * cellHeight);
-			ctx.lineTo(canvasWidth, y * cellHeight);
-			ctx.stroke();
+			loop = setInterval(gameLoop, 1000);
 		}
 	}
 	
@@ -78,25 +58,17 @@
 		clearFigure();
 		curY++;
 		drawFigure();
-	}
-	
-	function canvasWidth()
-	{
-		return canvasWidth;
-	}
-
-	function canvasWidth()
-	{
-		return canvasWidth;
-	}
+	}*/
 </script>
+<script type="text/javascript" src="tetris.js"></script>
+<script type="text/javascript" src="figure.js"></script>
 </head>
-<body onload="initCanvas()">
+<body onload="Tetris('gameBoard')">
     <h1>
       Tetris
     </h1>
     <div>
-      <canvas id="gameBoard" width="300" height="600">
+      <canvas id="gameBoard">
       </canvas>
     </div>
 </body>
