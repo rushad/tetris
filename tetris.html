@@ -2,66 +2,18 @@
 <html>
 <head>
 <title>Tetris</title>
-<script type="text/javascript">
-	function initGame()
-	{
-		var game = new Tetris("gameBoard");
-	}
-/*	
-	function initCanvas()
-	{
-		canvas = document.getElementById("gameBoard");
-		ctx = canvas.getContext("2d");
-		drawScene();
-		document.getElementById("gameBoard").onclick = startStop;
-	}
-	
-	function startStop()
-	{
-		if (loop)
-		{
-			clearInterval(loop);
-			loop = null;
-		}
-		else
-		{
-			loop = setInterval(gameLoop, 1000);
-		}
-	}
-	
-	function drawScene()
-	{
-		clearScene();
-		drawGrid();
-	}
-	
-	function clearFigure()
-	{
-		ctx.fillStyle = "black";
-		ctx.fillRect(curX * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-		ctx.fillRect((curX + 1) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-		ctx.fillRect((curX + 2) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-		ctx.fillRect((curX + 3) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-	}
-	
-	function drawFigure()
-	{
-		ctx.fillStyle = "blue";
-		ctx.fillRect(curX * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-		ctx.fillRect((curX + 1) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-		ctx.fillRect((curX + 2) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-		ctx.fillRect((curX + 3) * cellWidth + 1, curY * cellHeight + 1, cellWidth - 2, cellHeight - 2);
-	}
-	
-	function gameLoop()
-	{
-		clearFigure();
-		curY++;
-		drawFigure();
-	}*/
-</script>
 <script type="text/javascript" src="tetris.js"></script>
+<script type="text/javascript" src="model.js"></script>
 <script type="text/javascript" src="figure.js"></script>
+<script type="text/javascript" src="figure1.js"></script>
+<script type="text/javascript" src="figure2.js"></script>
+<script type="text/javascript" src="figure3.js"></script>
+<script type="text/javascript" src="figure4.js"></script>
+<script type="text/javascript" src="figure5.js"></script>
+<script type="text/javascript" src="figure6.js"></script>
+<script type="text/javascript" src="figure7.js"></script>
+<script type="text/javascript" src="canvas_view.js"></script>
+<script type="text/javascript" src="controller.js"></script>
 </head>
 <body onload="Tetris('gameBoard')">
     <h1>

@@ -1,0 +1,107 @@
+﻿function Model(width, height)
+{
+	var model = 
+	{
+		width: width,
+		height: height,
+		board: null,
+		
+		get: function(x, y)
+		{
+			return this.board[y][x];
+		},
+		
+		set: function(x, y)
+		{
+			this.board[y][x] = true;
+		},
+		
+		unset: function(x, y)
+		{
+			this.board[y][x] = false;
+		},
+		
+		fitsFigure: function(figure)
+		{
+			for (var i = 0; i < figure.points.length; i++)
+			{
+				if (figure.points[i].y < 0)
+					return false;
+				if (figure.points[i].y >= this.height)
+					return false;
+				if (figure.points[i].x < 0)
+					return false;
+				if (figure.points[i].x >= this.width)
+					return false;
+				if (this.get(figure.points[i].x, figure.points[i].y))
+					return false;
+			}
+			return true;
+		},
+		
+		placeFigure: function(figure)
+		{
+			for (var i = 0; i < figure.points.length; i++)
+			{
+				this.set(figure.points[i].x, figure.points[i].y);
+			}
+		},
+
+		removeFigure: function(figure)
+		{
+			for (var i = 0; i < figure.points.length; i++)
+			{
+				this.unset(figure.points[i].x, figure.points[i].y);
+			}
+		},
+		
+		isFullLine: function(y)
+		{
+			for (var x = 0; x < this.width; x++)
+			{
+				if (!this.get(x, y))
+					return false;
+			}
+			return true;
+		},
+		
+		freeLine: function(y)
+		{
+			for (var i = y - 1; i >= 0; i--)
+			{
+				for (var x = 0; x < this.width; x++)
+				{
+					this.board[i+1][x] = this.board[i][x];
+				}
+			}
+			for (var j = 0; j < this.width; j++)
+			{
+				this.board[0][j] = false;
+			}
+		},
+		
+		freeFullLines: function(figure)
+		{
+			for (var y = this.height-1; y >= 0; y--)
+			{
+				if (this.isFullLine(y))
+				{
+					this.freeLine(y);
+					y++;
+				}
+			}
+		}
+	};
+	
+	model.board = new Array(height);
+	for (var y = 0; y < height; y++)
+	{
+		model.board[y] = new Array(width);
+		for (var x = 0; x < width; x++)
+		{
+			model.board[y][x] = false;
+		}
+	}
+		
+	return model;
+}
