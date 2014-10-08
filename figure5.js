@@ -13,6 +13,8 @@ function Figure5()
 		{x: 5, y: 1},
 		{x: 4, y: 0}
 	];
+
+	figure.type = 5;
 	
 	return figure;
 }

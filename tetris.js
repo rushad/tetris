@@ -11,7 +11,7 @@ function loop()
 function Start(controller)
 {
 	loop();
-	loopId = setInterval(loop, 1000);
+	loopId = setInterval(loop, controller.interval);
 	document.onkeydown = function(e)
 	{
 		switch (e.keyCode)
@@ -41,14 +41,14 @@ function Stop()
 	loopId = null;
 }
 
-function Tetris(canvasId)
+function Tetris(canvasId, scoreId, levelId)
 {
 	var WIDTH_IN_CELLS = 10;
 	var HEIGHT_IN_CELLS = 20;
 	
 	model = new Model(WIDTH_IN_CELLS, HEIGHT_IN_CELLS);
 	view = new CanvasView(canvasId, model.width, model.height);
-	controller = new Controller(model, view);
+	controller = new Controller(model, view, document.getElementById(scoreId), document.getElementById(levelId));
 
 	Start(controller);
 }

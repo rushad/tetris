@@ -4,7 +4,7 @@
 	var CELL_HEIGHT = 25;
 	var GRID_COLOR = "gray";
 	var FIGURE_COLOR = "yellow";
-
+	var FIGURE_COLORS = [ "black", "red", "lime", "blue", "yellow", "cyan", "magenta", "white" ];
 	var canvasElement = document.getElementById(elementId);
 	if (!canvasElement || !canvasElement.getContext)
 	{
@@ -54,9 +54,9 @@
 			}
 		},
 		
-		fillCellAt: function(x, y)
+		fillCellAt: function(x, y, type)
 		{
-			this.ctx.fillStyle = this.figureColor;
+			this.ctx.fillStyle = FIGURE_COLORS[type];
 			this.ctx.fillRect(x * this.cellWidth + 1, y * this.cellHeight + 1, this.cellWidth-1, this.cellHeight - 1);
 		}
 	};

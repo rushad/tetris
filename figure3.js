@@ -14,5 +14,7 @@ function Figure3()
 		{x: 3, y: 1}
 	];
 	
+	figure.type = 3;
+
 	return figure;
 }

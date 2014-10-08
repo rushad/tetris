@@ -10,9 +10,13 @@
 			{x: 0, y: 0},
 		],
 		
+		type: 0,
+		
 		down: function()
 		{
 			var movedFigure = new Figure();
+			movedFigure.type = this.type;
+
 			for (var i = 0; i < this.points.length; i++)
 			{
 				movedFigure.points[i].x = this.points[i].x;
@@ -24,6 +28,8 @@
 		left: function()
 		{
 			var movedFigure = new Figure();
+			movedFigure.type = this.type;
+
 			for (var i = 0; i < this.points.length; i++)
 			{
 				movedFigure.points[i].x = this.points[i].x - 1;
@@ -35,6 +41,8 @@
 		right: function()
 		{
 			var movedFigure = new Figure();
+			movedFigure.type = this.type;
+
 			for (var i = 0; i < this.points.length; i++)
 			{
 				movedFigure.points[i].x = this.points[i].x + 1;
@@ -49,6 +57,7 @@
 			var m10 = -1, m11 = 0;
 
 			var movedFigure = new Figure();
+			movedFigure.type = this.type;
 			
 			for (var i = 0; i < this.points.length; i++)
 			{

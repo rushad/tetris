@@ -1,28 +1,52 @@
-﻿function Controller(model, view)
+﻿function Controller(_model, _view, _scoreElement, _levelElement)
 {
 	var NUMBER_OF_FIGURE_TYPES = 7;
+	var SCORE_FOR_FIGURE = 1;
+	var SCORE_FOR_CELL = 0.1;
+	var SCORE_FOR_LINE = 10;
+	var LINES_PER_LEVEL = 10;
+	var NEXT_LEVEL_COEFF = 0.75;
+	var START_INTERVAL = 1000;
+	
 	var controller = 
 	{
-		model: model,
-		view: view,
+		model: _model,
+		view: _view,
+		scoreElement: _scoreElement,
+		levelElement: _levelElement,
 		figure: null,
+		score: 0,
+		lines: 0,
+		interval: START_INTERVAL,
+		level: 1,
 		
 		draw: function()
 		{
-			view.clear();
+			this.view.clear();
 			
-			for (var y = 0; y < model.height; y++)
+			for (var y = 0; y < this.model.height; y++)
 			{
-				for (var x = 0; x < model.width; x++)
+				for (var x = 0; x < this.model.width; x++)
 				{
-					if (model.get(x, y))
+					var type = this.model.get(x, y);
+					if (type)
 					{
-						view.fillCellAt(x, y);
+						this.view.fillCellAt(x, y, type);
 					}
 				}
 			}
 		},
 		
+		drawScores: function()
+		{
+			this.scoreElement.innerHTML = "Score: " + Math.floor(this.score);
+		},
+		
+		drawLevel: function()
+		{
+			this.levelElement.innerHTML = "Level: " + this.level;
+		},
+
 		randomFigure: function()
 		{
 			var figureType = Math.round(Math.random() * (NUMBER_OF_FIGURE_TYPES - 1) + 1);
@@ -58,10 +82,10 @@
 		{
 			var figure = this.randomFigure();
 			
-			if (!model.fitsFigure(figure))
+			if (!this.model.fitsFigure(figure))
 				return false;
 
-			model.placeFigure(figure);
+			this.model.placeFigure(figure);
 			this.figure = figure;
 			
 			return true;
@@ -69,18 +93,28 @@
 		
 		moveFigure:function()
 		{
-			model.removeFigure(this.figure);
+			this.model.removeFigure(this.figure);
 			var movedFigure = this.figure.down();
-			if (!model.fitsFigure(movedFigure))
+			if (!this.model.fitsFigure(movedFigure))
 			{
-				model.placeFigure(this.figure);
+				this.model.placeFigure(this.figure);
 				this.figure = null;
-				model.freeFullLines();
-				loop();
+				this.score += SCORE_FOR_FIGURE * this.level;
+				this.drawScores();
+				this.lines += this.model.freeFullLines();
+				if (this.level < 10 && this.lines > this.level * LINES_PER_LEVEL)
+				{
+					this.level++;
+					this.interval *= NEXT_LEVEL_COEFF;
+					this.drawLevel();
+					Stop();
+					Start(this);
+				}
+				this.loop();
 			}
 			else
 			{
-				model.placeFigure(movedFigure);
+				this.model.placeFigure(movedFigure);
 				this.figure = movedFigure;
 			}
 			this.draw();
@@ -113,15 +147,16 @@
 		{
 			if (this.figure)
 			{
-				model.removeFigure(this.figure);
+				this.model.removeFigure(this.figure);
 				var tempFigure = this.figure;
 				var movedFigure = tempFigure.down();
-				while (model.fitsFigure(movedFigure))
+				while (this.model.fitsFigure(movedFigure))
 				{
+					this.score += SCORE_FOR_CELL * this.level;
 					tempFigure = movedFigure;
 					movedFigure = tempFigure.down();
 				}
-				model.placeFigure(tempFigure);
+				this.model.placeFigure(tempFigure);
 				this.figure = tempFigure;
 				this.draw();
 			}
@@ -131,15 +166,15 @@
 		{
 			if (this.figure)
 			{
-				model.removeFigure(this.figure);
+				this.model.removeFigure(this.figure);
 				var movedFigure = this.figure.left();
-				if (!model.fitsFigure(movedFigure))
+				if (!this.model.fitsFigure(movedFigure))
 				{
-					model.placeFigure(this.figure);
+					this.model.placeFigure(this.figure);
 				}
 				else
 				{
-					model.placeFigure(movedFigure);
+					this.model.placeFigure(movedFigure);
 					this.figure = movedFigure;
 					this.draw();
 				}
@@ -150,15 +185,15 @@
 		{
 			if (this.figure)
 			{
-				model.removeFigure(this.figure);
+				this.model.removeFigure(this.figure);
 				var movedFigure = this.figure.right();
-				if (!model.fitsFigure(movedFigure))
+				if (!this.model.fitsFigure(movedFigure))
 				{
-					model.placeFigure(this.figure);
+					this.model.placeFigure(this.figure);
 				}
 				else
 				{
-					model.placeFigure(movedFigure);
+					this.model.placeFigure(movedFigure);
 					this.figure = movedFigure;
 					this.draw();
 				}
@@ -169,15 +204,16 @@
 		{
 			if (this.figure)
 			{
-				model.removeFigure(this.figure);
+				this.model.removeFigure(this.figure);
 				var movedFigure = this.figure.down();
-				if (!model.fitsFigure(movedFigure))
+				if (!this.model.fitsFigure(movedFigure))
 				{
-					model.placeFigure(this.figure);
+					this.model.placeFigure(this.figure);
 				}
 				else
 				{
-					model.placeFigure(movedFigure);
+					this.score += SCORE_FOR_CELL * this.level;
+					this.model.placeFigure(movedFigure);
 					this.figure = movedFigure;
 					this.draw();
 				}
@@ -188,16 +224,16 @@
 		{
 			if (this.figure)
 			{
-				model.removeFigure(this.figure);
+				this.model.removeFigure(this.figure);
 			
 				var movedFigure = this.figure.turn();
-				if (!model.fitsFigure(movedFigure))
+				if (!this.model.fitsFigure(movedFigure))
 				{
-					model.placeFigure(this.figure);
+					this.model.placeFigure(this.figure);
 				}
 				else
 				{
-					model.placeFigure(movedFigure);
+					this.model.placeFigure(movedFigure);
 					this.figure = movedFigure;
 					this.draw();
 				}

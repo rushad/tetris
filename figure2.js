@@ -14,7 +14,7 @@ function Figure2()
 		{x: 5, y: 1}
 	];
 	
-	figure.center = 1;
+	figure.type = 2;
 	
 	return figure;
 }

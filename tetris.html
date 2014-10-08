@@ -16,14 +16,21 @@
 	<script type="text/javascript" src="canvas_view.js"></script>
 	<script type="text/javascript" src="controller.js"></script>
 </head>
-<body onload="Tetris('gameBoard')">
-    <h1>
-      Tetris
-    </h1>
-    <div id="container">
+<body onload="Tetris('gameBoard', 'score', 'level')">
+		<div id="caption">
+			<h1>Tetris</h1>
+			<small>&copy; by Rushad</small>
+			<hr>
+			<h3 id="score">
+				Score: 0
+			</h3>
+			<h3 id="level">
+				Level: 1
+			</h3>
+		</div>
+		<div id="container">
 			<img id="kitten" src="http://placekitten.com/g/251/501">
-      <canvas id="gameBoard">
-      </canvas>
-    </div>
+			<canvas id="gameBoard"></canvas>
+		</div>
 </body>
 </html>

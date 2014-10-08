@@ -11,14 +11,14 @@
 			return this.board[y][x];
 		},
 		
-		set: function(x, y)
+		set: function(x, y, type)
 		{
-			this.board[y][x] = true;
+			this.board[y][x] = type;
 		},
 		
 		unset: function(x, y)
 		{
-			this.board[y][x] = false;
+			this.board[y][x] = 0;
 		},
 		
 		fitsFigure: function(figure)
@@ -43,7 +43,7 @@
 		{
 			for (var i = 0; i < figure.points.length; i++)
 			{
-				this.set(figure.points[i].x, figure.points[i].y);
+				this.set(figure.points[i].x, figure.points[i].y, figure.type);
 			}
 		},
 
@@ -76,20 +76,23 @@
 			}
 			for (var j = 0; j < this.width; j++)
 			{
-				this.board[0][j] = false;
+				this.board[0][j] = 0;
 			}
 		},
 		
 		freeFullLines: function(figure)
 		{
+			var lines = 0;
 			for (var y = this.height-1; y >= 0; y--)
 			{
 				if (this.isFullLine(y))
 				{
 					this.freeLine(y);
+					lines++;
 					y++;
 				}
 			}
+			return lines;
 		}
 	};
 	
@@ -99,7 +102,7 @@
 		model.board[y] = new Array(width);
 		for (var x = 0; x < width; x++)
 		{
-			model.board[y][x] = false;
+			model.board[y][x] = 0;
 		}
 	}
 		

@@ -13,5 +13,7 @@ function Figure7()
 		{x: 6, y: 0}
 	];
 	
+	figure.type = 7;
+
 	return figure;
 }
