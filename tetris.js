@@ -17,6 +17,8 @@ function Start(controller)
 		switch (e.keyCode)
 		{
 			case 32:
+				controller.spacePressed();
+				break;
 			case 40:
 				controller.downPressed();
 				break;

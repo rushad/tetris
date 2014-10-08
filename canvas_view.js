@@ -2,9 +2,8 @@
 {
 	var CELL_WIDTH = 25;
 	var CELL_HEIGHT = 25;
-	var BACKGROUND_COLOR = "black";
 	var GRID_COLOR = "gray";
-	var FIGURE_COLOR = "lightgray";
+	var FIGURE_COLOR = "yellow";
 
 	var canvasElement = document.getElementById(elementId);
 	if (!canvasElement || !canvasElement.getContext)
@@ -21,7 +20,6 @@
 		cellHeight: CELL_HEIGHT,
 		canvasWidth: width * CELL_WIDTH + 1,
 		canvasHeight: height * CELL_HEIGHT + 1,
-		backgroundColor: BACKGROUND_COLOR,
 		gridColor: GRID_COLOR,
 		figureColor: FIGURE_COLOR,
 		ctx: canvasElement.getContext("2d"),
@@ -47,12 +45,11 @@
 		
 		clear: function()
 		{
-			this.ctx.fillStyle = this.backgroundColor;
 			for (var y = 0; y < this.height; y++)
 			{
 				for (var x = 0; x < this.width; x++)
 				{
-					this.ctx.fillRect(x * this.cellWidth + 1, y * this.cellHeight + 1, this.cellWidth-1, this.cellHeight - 1);
+					this.ctx.clearRect(x * this.cellWidth + 1, y * this.cellHeight + 1, this.cellWidth-1, this.cellHeight - 1);
 				}
 			}
 		},

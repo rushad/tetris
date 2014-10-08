@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tetris</title>
-<script type="text/javascript" src="tetris.js"></script>
-<script type="text/javascript" src="model.js"></script>
-<script type="text/javascript" src="figure.js"></script>
-<script type="text/javascript" src="figure1.js"></script>
-<script type="text/javascript" src="figure2.js"></script>
-<script type="text/javascript" src="figure3.js"></script>
-<script type="text/javascript" src="figure4.js"></script>
-<script type="text/javascript" src="figure5.js"></script>
-<script type="text/javascript" src="figure6.js"></script>
-<script type="text/javascript" src="figure7.js"></script>
-<script type="text/javascript" src="canvas_view.js"></script>
-<script type="text/javascript" src="controller.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Tetris</title>
+	<script type="text/javascript" src="tetris.js"></script>
+	<script type="text/javascript" src="model.js"></script>
+	<script type="text/javascript" src="figure.js"></script>
+	<script type="text/javascript" src="figure1.js"></script>
+	<script type="text/javascript" src="figure2.js"></script>
+	<script type="text/javascript" src="figure3.js"></script>
+	<script type="text/javascript" src="figure4.js"></script>
+	<script type="text/javascript" src="figure5.js"></script>
+	<script type="text/javascript" src="figure6.js"></script>
+	<script type="text/javascript" src="figure7.js"></script>
+	<script type="text/javascript" src="canvas_view.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
 </head>
 <body onload="Tetris('gameBoard')">
     <h1>
       Tetris
     </h1>
-    <div>
+    <div id="container">
+			<img id="kitten" src="http://placekitten.com/g/251/501">
       <canvas id="gameBoard">
       </canvas>
     </div>

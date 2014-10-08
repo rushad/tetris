@@ -76,6 +76,7 @@
 				model.placeFigure(this.figure);
 				this.figure = null;
 				model.freeFullLines();
+				loop();
 			}
 			else
 			{
@@ -105,6 +106,24 @@
 			else
 			{
 				this.moveFigure();
+			}
+		},
+		
+		spacePressed: function()
+		{
+			if (this.figure)
+			{
+				model.removeFigure(this.figure);
+				var tempFigure = this.figure;
+				var movedFigure = tempFigure.down();
+				while (model.fitsFigure(movedFigure))
+				{
+					tempFigure = movedFigure;
+					movedFigure = tempFigure.down();
+				}
+				model.placeFigure(tempFigure);
+				this.figure = tempFigure;
+				this.draw();
 			}
 		},
 		
