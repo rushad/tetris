@@ -1,13 +1,5 @@
 ﻿function Controller(_model, _view, _scoreElement, _levelElement)
 {
-	var NUMBER_OF_FIGURE_TYPES = 7;
-	var SCORE_FOR_FIGURE = 1;
-	var SCORE_FOR_CELL = 0.1;
-	var SCORE_FOR_LINE = 10;
-	var LINES_PER_LEVEL = 10;
-	var NEXT_LEVEL_COEFF = 0.75;
-	var START_INTERVAL = 1000;
-	
 	var controller = 
 	{
 		model: _model,
@@ -237,6 +229,20 @@
 					this.figure = movedFigure;
 					this.draw();
 				}
+			}
+		},
+		
+		pausePressed: function()
+		{
+			if (loopId)
+			{
+				Stop();
+				this.view.pause();
+			}
+			else
+			{
+				this.view.init();
+				Start(this);
 			}
 		}
 	};

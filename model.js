@@ -1,9 +1,9 @@
-﻿function Model(width, height)
+﻿function Model(_width, _height)
 {
 	var model = 
 	{
-		width: width,
-		height: height,
+		width: _width,
+		height: _height,
 		board: null,
 		
 		get: function(x, y)
@@ -96,11 +96,11 @@
 		}
 	};
 	
-	model.board = new Array(height);
-	for (var y = 0; y < height; y++)
+	model.board = new Array(model.height);
+	for (var y = 0; y < model.height; y++)
 	{
-		model.board[y] = new Array(width);
-		for (var x = 0; x < width; x++)
+		model.board[y] = new Array(model.width);
+		for (var x = 0; x < model.width; x++)
 		{
 			model.board[y][x] = 0;
 		}

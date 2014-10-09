@@ -1,10 +1,9 @@
-﻿function CanvasView(elementId, width, height)
+﻿function CanvasView(elementId, _width, _height)
 {
 	var CELL_WIDTH = 25;
 	var CELL_HEIGHT = 25;
 	var GRID_COLOR = "gray";
-	var FIGURE_COLOR = "yellow";
-	var FIGURE_COLORS = [ "black", "red", "lime", "blue", "yellow", "cyan", "magenta", "white" ];
+
 	var canvasElement = document.getElementById(elementId);
 	if (!canvasElement || !canvasElement.getContext)
 	{
@@ -14,14 +13,13 @@
 	
 	var view =
 	{
-		width: width,
-		height: height,
+		width: _width,
+		height: _height,
 		cellWidth: CELL_WIDTH,
 		cellHeight: CELL_HEIGHT,
-		canvasWidth: width * CELL_WIDTH + 1,
-		canvasHeight: height * CELL_HEIGHT + 1,
+		canvasWidth: _width * CELL_WIDTH + 1,
+		canvasHeight: _height * CELL_HEIGHT + 1,
 		gridColor: GRID_COLOR,
-		figureColor: FIGURE_COLOR,
 		ctx: canvasElement.getContext("2d"),
 		
 		init: function() 
@@ -58,6 +56,16 @@
 		{
 			this.ctx.fillStyle = FIGURE_COLORS[type];
 			this.ctx.fillRect(x * this.cellWidth + 1, y * this.cellHeight + 1, this.cellWidth-1, this.cellHeight - 1);
+		},
+		
+		pause: function()
+		{
+			this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+			this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+			this.ctx.font = "15pt Times";
+			this.ctx.fillStyle = "white";
+			this.ctx.textAlign = "center";
+			this.ctx.fillText("Press 'P' to continue", this.canvasWidth / 2, this.canvasHeight / 2);
 		}
 	};
 	

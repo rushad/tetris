@@ -1,4 +1,29 @@
-﻿var model;
+﻿var WIDTH_IN_CELLS = 10;
+var HEIGHT_IN_CELLS = 20;
+
+var FIGURE_COLORS = [ "black", "red", "lime", "blue", "yellow", "cyan", "magenta", "white" ];
+
+var NUMBER_OF_FIGURE_TYPES = 7;
+
+var SCORE_FOR_FIGURE = 1;
+var SCORE_FOR_CELL = 0.1;
+var SCORE_FOR_LINE = 10;
+
+var LINES_PER_LEVEL = 10;
+
+var NEXT_LEVEL_COEFF = 0.75;
+
+var START_INTERVAL = 1000;
+
+var KEY_SPACE = 32;
+var KEY_LEFT = 37;
+var KEY_UP = 38;
+var KEY_RIGHT = 39;
+var KEY_DOWN = 40;
+var KEY_P = 80;
+var KEY_BREAK = 19;
+
+var model;
 var view;
 var controller;
 var loopId;
@@ -10,26 +35,30 @@ function loop()
 
 function Start(controller)
 {
-	loop();
+	controller.loop();
 	loopId = setInterval(loop, controller.interval);
 	document.onkeydown = function(e)
 	{
 		switch (e.keyCode)
 		{
-			case 32:
+			case KEY_SPACE:
 				controller.spacePressed();
 				break;
-			case 40:
+			case KEY_DOWN:
 				controller.downPressed();
 				break;
-			case 37:
+			case KEY_LEFT:
 				controller.leftPressed();
 				break;
-			case 38:
+			case KEY_UP:
 				controller.turnPressed();
 				break;
-			case 39:
+			case KEY_RIGHT:
 				controller.rightPressed();
+				break;
+			case KEY_P:
+			case KEY_BREAK:
+				controller.pausePressed();
 				break;
 		}
 	};
@@ -43,9 +72,6 @@ function Stop()
 
 function Tetris(canvasId, scoreId, levelId)
 {
-	var WIDTH_IN_CELLS = 10;
-	var HEIGHT_IN_CELLS = 20;
-	
 	model = new Model(WIDTH_IN_CELLS, HEIGHT_IN_CELLS);
 	view = new CanvasView(canvasId, model.width, model.height);
 	controller = new Controller(model, view, document.getElementById(scoreId), document.getElementById(levelId));
