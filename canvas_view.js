@@ -55,16 +55,18 @@
 		fillCellAt: function(x, y, type)
 		{
 			this.ctx.fillStyle = FIGURE_COLORS[type];
-			this.ctx.fillRect(x * this.cellWidth + 1, y * this.cellHeight + 1, this.cellWidth-1, this.cellHeight - 1);
+			this.ctx.fillRect(x * this.cellWidth + 1, y * this.cellHeight + 1, this.cellWidth - 1, this.cellHeight - 1);
 		},
 		
 		pause: function()
 		{
-			this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+			this.ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
 			this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 			this.ctx.font = "15pt Times";
-			this.ctx.fillStyle = "white";
 			this.ctx.textAlign = "center";
+			this.ctx.fillStyle = "black";
+			this.ctx.fillText("Press 'P' to continue", this.canvasWidth / 2 + 2, this.canvasHeight / 2 + 2);
+			this.ctx.fillStyle = "white";
 			this.ctx.fillText("Press 'P' to continue", this.canvasWidth / 2, this.canvasHeight / 2);
 		}
 	};

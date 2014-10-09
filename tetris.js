@@ -42,19 +42,24 @@ function Start(controller)
 		switch (e.keyCode)
 		{
 			case KEY_SPACE:
-				controller.spacePressed();
+				if (loopId)
+					controller.spacePressed();
 				break;
 			case KEY_DOWN:
-				controller.downPressed();
+				if (loopId)
+					controller.downPressed();
 				break;
 			case KEY_LEFT:
-				controller.leftPressed();
+				if (loopId)
+					controller.leftPressed();
 				break;
 			case KEY_UP:
-				controller.turnPressed();
+				if (loopId)
+					controller.turnPressed();
 				break;
 			case KEY_RIGHT:
-				controller.rightPressed();
+				if (loopId)
+					controller.rightPressed();
 				break;
 			case KEY_P:
 			case KEY_BREAK:
@@ -70,10 +75,19 @@ function Stop()
 	loopId = null;
 }
 
-function Tetris(canvasId, scoreId, levelId)
+function TetrisCanvas(canvasId, scoreId, levelId)
 {
 	model = new Model(WIDTH_IN_CELLS, HEIGHT_IN_CELLS);
 	view = new CanvasView(canvasId, model.width, model.height);
+	controller = new Controller(model, view, document.getElementById(scoreId), document.getElementById(levelId));
+
+	Start(controller);
+}
+
+function TetrisSvg(svgId, scoreId, levelId)
+{
+	model = new Model(WIDTH_IN_CELLS, HEIGHT_IN_CELLS);
+	view = new SvgView(svgId, model.width, model.height);
 	controller = new Controller(model, view, document.getElementById(scoreId), document.getElementById(levelId));
 
 	Start(controller);

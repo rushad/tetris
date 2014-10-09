@@ -15,9 +15,11 @@
 	<script type="text/javascript" src="figure6.js"></script>
 	<script type="text/javascript" src="figure7.js"></script>
 	<script type="text/javascript" src="canvas_view.js"></script>
+	<script type="text/javascript" src="svg_view.js"></script>
 	<script type="text/javascript" src="controller.js"></script>
 </head>
-<body onload="Tetris('gameBoard', 'score', 'level')">
+<!--body onload="TetrisCanvas('canvasBoard', 'score', 'level')"-->
+<body onload="TetrisSvg('svgBoard', 'score', 'level')">
 		<div id="caption">
 			<h1>Tetris</h1>
 			<small>&copy; Rushad Nabiullin 2014</small>
@@ -31,7 +33,9 @@
 		</div>
 		<div id="container">
 			<img id="kitten" src="http://placekitten.com/g/251/501">
-			<canvas id="gameBoard"></canvas>
+			<canvas id="canvasBoard"></canvas>
+			<svg id="svgBoard" viewBox="0 0 251 501">
+			</svg>
 		</div>
 </body>
 </html>
