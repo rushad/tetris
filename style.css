@@ -3,7 +3,8 @@
 	background: cadetblue;
 }
 
-#caption
+#caption,
+#footer
 {
 	margin-left: auto;
 	margin-right: auto;
