@@ -1,6 +1,9 @@
 ﻿var WIDTH_IN_CELLS = 10;
 var HEIGHT_IN_CELLS = 20;
 
+var CELL_WIDTH = 25;
+var CELL_HEIGHT = 25;
+
 var FIGURE_COLORS = [ "black", "red", "lime", "blue", "yellow", "cyan", "magenta", "white" ];
 
 var NUMBER_OF_FIGURE_TYPES = 7;
@@ -26,6 +29,7 @@ var KEY_BREAK = 19;
 var model;
 var view;
 var controller;
+var board;
 var loopId;
 
 function loop()
@@ -67,6 +71,24 @@ function Start(controller)
 				break;
 		}
 	};
+	document.onmousedown = function(e)
+	{
+		var x = controller.figure.points[0].x;
+		var y = controller.figure.points[0].y;
+
+		var rect = board.getBoundingClientRect();
+		var ex = e.x - rect.left;
+		var ey = e.y - rect.top;
+
+		if (ey < (y - 2) * CELL_HEIGHT)
+			controller.turnPressed();
+		else if (ey > (y + 4) * CELL_HEIGHT)
+			controller.spacePressed();
+		else if (ex < x * CELL_WIDTH)
+			controller.leftPressed();
+		else if (ex > x * CELL_WIDTH)
+			controller.rightPressed();
+	}
 }
 
 function Stop()
@@ -81,6 +103,8 @@ function TetrisCanvas(canvasId, scoreId, levelId)
 	view = new CanvasView(canvasId, model.width, model.height);
 	controller = new Controller(model, view, document.getElementById(scoreId), document.getElementById(levelId));
 
+	board = document.getElementById(canvasId);
+
 	Start(controller);
 }
 
@@ -92,4 +116,3 @@ function TetrisSvg(svgId, scoreId, levelId)
 
 	Start(controller);
 }
-

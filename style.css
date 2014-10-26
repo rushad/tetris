@@ -1,6 +1,18 @@
 ﻿body
 {
 	background: cadetblue;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+hr
+{
+	margin-top: 1em;
+	margin-bottom: 0;
 }
 
 #caption,
@@ -10,20 +22,24 @@
 	margin-right: auto;
 	text-align:center;
 	width: 251px;
-	margin-bottom: 3em;
+	margin-bottom: 2em;
 }
 
 #score
 {
 	float: left;
+	margin: 0;
+	padding: 5px;
 }
 
 #level
 {
 	float: right;
+	margin: 0;
+	padding: 5px;
 }
 
-#container 
+#container
 {
 	margin-left: auto;
 	margin-right: auto;
@@ -32,7 +48,7 @@
   position: relative;
 }
 
-#kitten, 
+#kitten,
 #canvasBoard,
 #svgBoard
 {

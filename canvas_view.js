@@ -1,7 +1,5 @@
 ﻿function CanvasView(elementId, _width, _height)
 {
-	var CELL_WIDTH = 25;
-	var CELL_HEIGHT = 25;
 	var GRID_COLOR = "gray";
 
 	var canvasElement = document.getElementById(elementId);
@@ -10,7 +8,7 @@
 		console.log("No canvas with id=" + elementId);
 		return;
 	}
-	
+
 	var view =
 	{
 		width: _width,
@@ -21,8 +19,8 @@
 		canvasHeight: _height * CELL_HEIGHT + 1,
 		gridColor: GRID_COLOR,
 		ctx: canvasElement.getContext("2d"),
-		
-		init: function() 
+
+		init: function()
 		{
 			this.ctx.strokeStyle = this.gridColor;
 			this.ctx.lineWidth = 1;
@@ -40,7 +38,7 @@
 			}
 			this.clear();
 		},
-		
+
 		clear: function()
 		{
 			for (var y = 0; y < this.height; y++)
@@ -51,13 +49,13 @@
 				}
 			}
 		},
-		
+
 		fillCellAt: function(x, y, type)
 		{
 			this.ctx.fillStyle = FIGURE_COLORS[type];
 			this.ctx.fillRect(x * this.cellWidth + 1, y * this.cellHeight + 1, this.cellWidth - 1, this.cellHeight - 1);
 		},
-		
+
 		pause: function()
 		{
 			this.ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
@@ -70,11 +68,11 @@
 			this.ctx.fillText("Press 'P' to continue", this.canvasWidth / 2, this.canvasHeight / 2);
 		}
 	};
-	
+
 	canvasElement.width = view.canvasWidth;
 	canvasElement.height = view.canvasHeight;
-	
+
 	view.init();
-	
+
 	return view;
 }
